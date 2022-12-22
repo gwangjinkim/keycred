@@ -86,3 +86,10 @@ cred = Credentials(
 cred.set_keypass_credentials()
 cred.set_credentials("test1")
 """
+'''
+reinintializing existing kbdx doesnt work yet - Credential error
+ignored the keyfile and transformed_key parameters.
+
+there should be also a delete_credentials() method
+
+'''
