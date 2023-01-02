@@ -35,16 +35,16 @@ class Credentials:
         
     def prepare_kp(self):
         if not (os.path.exists(self.user_path) and os.path.exists(self.pass_path) and os.path.exists(self.key_path)):
-            self.set_keypass_credentials(self.key_path, self.user_path, self.pass_path)
-        self.co = self.get_keypass_credentials()
+            self.set_keepass_credentials(self.key_path, self.user_path, self.pass_path)
+        self.co = self.get_keepass_credentials()
         self.kp = PyKeePass(self.kdbx_path, password=self.co.password)
         
     # LOGNAME, USER, LNAME, USERNAME
-    def set_keypass_credentials(self):
+    def set_keepass_credentials(self):
         aes = pycryptaes.AES()
         aes.generate_key_user_pass(self.key_path, self.user_path, self.pass_path)
     
-    def get_keypass_credentials(self):
+    def get_keepass_credentials(self):
         aes = pycryptaes.AES()
         co = aes.read_key_user_pass(self.key_path, self.user_path, self.pass_path)
         return co
@@ -83,7 +83,7 @@ cred = Credentials(
     pass_path=os.path.join(os.environ['USERPROFILE'], "_test", ".user"),
     key_path=os.path.join(os.environ['USERPROFILE'], "_test", ".pass")
 )
-cred.set_keypass_credentials()
+cred.set_keepass_credentials()
 cred.set_credentials("test1")
 """
 '''
